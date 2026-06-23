@@ -71,3 +71,5 @@ export class MinHeap {
     }
   }
 }
+
+// Time complexities - // [images/2. min-heap_2026-06-22-23-07-30.png]

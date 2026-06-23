@@ -5,7 +5,7 @@
 
 // Then in the main method, loop over entire nums array and then get the total sum
 
-// Avoid mistake - The problem is not akksing the sum between the elements, it i asking the sum of elements which fall into this [rangeStart, rangeEnd] range
+// Avoid mistake - The problem is not asking the sum between the elements, it i asking the sum of elements which fall into this [rangeStart, rangeEnd] range
 
 import { MaxHeap } from "../../SIMILAR-PRACTICE/1. max-heap.js";
 import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
@@ -56,4 +56,4 @@ function KthSmallest(nums, k) {
   return maxHeap.getMax();
 }
 
-console.log(kRangeSum([4, 2, 5, 1, 3, 6], 4, 5));
+console.log(kRangeSum([4, 7, 2, 12, 5], 2, 3));

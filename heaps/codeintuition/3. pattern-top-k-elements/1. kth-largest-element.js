@@ -44,20 +44,21 @@ function kthLargest(nums, k) {
   const minHeap = new MinHeap();
 
   for (let i = 0; i < nums.length; i++) {
-    minHeap.insert(nums[i]);
+    // TC - Loop runs exactly n times!
+    minHeap.insert(nums[i]); // TC - inserting in the heap depends on the current size of heap, so it will be O(log k) not O(log n)!
 
     if (minHeap.size() > k) {
-      minHeap.extractMin();
+      minHeap.extractMin(); // TC - Similarly, extracting the minimum element takes logarithmic time relative to the heap's current size. So it will be O(log k) not O(log n)!
     }
   }
 
-  return minHeap.getMin();
+  return minHeap.getMin(); // O(1)
 }
 
-console.log(kthLargest([5, 4, 2, 8], 2))
+console.log(kthLargest([5, 4, 2, 8], 2));
 
-// TC - O(n logK)
-// SC - O(k)
+// TC - Loop O(n), inside loop insert and extractMin both takes O(log k) so total TC is - O(n log k)
+// SC - Heap only store k elements - O(k)
 
 // kth largest element
 // We use the MinHeap

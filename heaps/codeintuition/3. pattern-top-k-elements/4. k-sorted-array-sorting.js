@@ -49,9 +49,9 @@ function kSortedArray(arr, k) {
   const minHeap = new MinHeap();
 
   // build initial heap of size k + 1
-  for (let i = 0; i < k + 1; i++) {
-    minHeap.insert(arr[i]);
-  }
+  for (let i = 0; i < k + 1; i++) { // O(log k + 1)
+    minHeap.insert(arr[i]); // O(log k)
+  } // O(k log k)
 
   // after building the initial heap:
   // heap contains first k + 1 elements
@@ -59,16 +59,17 @@ function kSortedArray(arr, k) {
   // extract min -> place it at correct position in arr
   // insert next element into heap
 
-  for (let i = k + 1; i < arr.length; i++) {
-    arr[i - k - 1] = minHeap.extractMin(); // place min at correct position
-    minHeap.insert(arr[i]);
-  }
+  for (let i = k + 1; i < arr.length; i++) { // O(n)
+    arr[i - k - 1] = minHeap.extractMin(); // place min at correct position 
+    minHeap.insert(arr[i]); // O(log k)
+  } // O(n log k)
 
   // empty remaining heap elements
   // empty remaining heap elements
   let outputIndex = arr.length - k - 1;
   while (!minHeap.isEmpty()) {
-    arr[outputIndex++] = minHeap.extractMin();
+    arr[outputIndex] = minHeap.extractMin();
+    outputIndex++
   }
 
   return arr;
