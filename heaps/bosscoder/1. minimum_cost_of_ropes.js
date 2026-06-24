@@ -39,26 +39,27 @@
 
 // Finish: Once the while loop ends (meaning only 1 massive connected rope remains in the heap), return your totalCost.
 
-import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap";
+// import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap";
+const { PriorityQueue, MinPriorityQueue } = require("@datastructures-js/priority-queue");
 
 function minimumCostOfRopes(nums) {
-  const minHeap = new MinHeap();
+  const minHeap = new MinPriorityQueue();
 
   for (let i = 0; i < nums.length; i++) {
-    minHeap.insert(nums[i]);
+    minHeap.enqueue(nums[i]);
   }
 
   let totalCost = 0;
 
   while (minHeap.size() > 1) {
-    const minimumElement = minHeap.extractMin();
-    const secondMinimumElement = minHeap.extractMin();
+    const minimumElement = minHeap.dequeue();
+    const secondMinimumElement = minHeap.dequeue();
 
     const currentCost = minimumElement + secondMinimumElement;
 
     totalCost += currentCost;
 
-    minHeap.insert(currentCost);
+    minHeap.enqueue(currentCost);
   }
 
   return totalCost;

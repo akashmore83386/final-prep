@@ -1,15 +1,16 @@
-import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap.js";
+// import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap.js";
+const { PriorityQueue, MinPriorityQueue } = require("@datastructures-js/priority-queue");
 
 function mergeKSortedLists(lists) {
   // have a mean heap to store the lists values
-  const minHeap = new MinHeap();
+  const minHeap = new MinPriorityQueue();
 
   // loop over the list
   for (let i = 0; i < lists.length; i++) {
     let temp = lists[i];
 
     while (temp !== null) {
-      minHeap.insert(temp.val);
+      minHeap.enqueue(temp.val);
       temp = temp.next;
     }
   }
@@ -19,7 +20,7 @@ function mergeKSortedLists(lists) {
   let k = dummyNode;
 
   while (!minHeap.isEmpty()) {
-    let element = minHeap.extractMin();
+    let element = minHeap.dequeue();
     let node = new ListNode(element);
     k.next = node;
     k = k.next;

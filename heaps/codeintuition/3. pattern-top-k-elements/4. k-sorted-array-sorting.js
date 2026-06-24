@@ -43,33 +43,39 @@
 // each heap operation = O(log k) (heap size stays k+1)
 // Total = O(n log k)
 
-import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
+// import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
+const {
+  PriorityQueue,
+  MinPriorityQueue,
+} = require("@datastructures-js/priority-queue");
 
 function kSortedArray(arr, k) {
-  const minHeap = new MinHeap();
+  const minHeap = new MinPriorityQueue();
 
   // build initial heap of size k + 1
-  for (let i = 0; i < k + 1; i++) { // O(log k + 1)
-    minHeap.insert(arr[i]); // O(log k)
+  for (let i = 0; i < k + 1; i++) {
+    // O(log k + 1)
+    minHeap.enqueue(arr[i]); // O(log k)
   } // O(k log k)
 
   // after building the initial heap:
   // heap contains first k + 1 elements
   // now for each remaining element:
   // extract min -> place it at correct position in arr
-  // insert next element into heap
+  // enqueue next element into heap
 
-  for (let i = k + 1; i < arr.length; i++) { // O(n)
-    arr[i - k - 1] = minHeap.extractMin(); // place min at correct position 
-    minHeap.insert(arr[i]); // O(log k)
+  for (let i = k + 1; i < arr.length; i++) {
+    // O(n)
+    arr[i - k - 1] = minHeap.dequeue(); // place min at correct position
+    minHeap.enqueue(arr[i]); // O(log k)
   } // O(n log k)
 
   // empty remaining heap elements
   // empty remaining heap elements
   let outputIndex = arr.length - k - 1;
   while (!minHeap.isEmpty()) {
-    arr[outputIndex] = minHeap.extractMin();
-    outputIndex++
+    arr[outputIndex] = minHeap.dequeue();
+    outputIndex++;
   }
 
   return arr;

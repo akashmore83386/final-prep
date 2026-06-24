@@ -21,21 +21,23 @@
 
 // If the sizes are exactly the same, NO!! This time it is the even case!! NOW we simply get the top elements of both heaps, add them together, and divide by 2 so we get the exact median.
 
-import { MaxHeap } from "../SIMILAR-PRACTICE/1. max-heap.js";
-import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap.js";
+// import { MaxHeap } from "../SIMILAR-PRACTICE/1. max-heap.js";
+// import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap.js";
+
+const { PriorityQueue, MinPriorityQueue, MaxPriorityQueue } = require("@datastructures-js/priority-queue");
 
 class MedianFinder {
   constructor() {
-    this.minHeap = new MinHeap();
-    this.maxHeap = new MaxHeap();
+    this.minHeap = new MinPriorityQueue();
+    this.maxHeap = new MaxPriorityQueue();
   }
 
   addNum(num) {
-    this.maxHeap.insert(num);
-    this.minHeap.insert(this.maxHeap.extractMax());
+    this.maxHeap.enqueue(num);
+    this.minHeap.enqueue(this.maxHeap.dequeue());
 
     if (this.maxHeap.size() < this.minHeap.size()) {
-      this.maxHeap.insert(this.minHeap.extractMin());
+      this.maxHeap.enqueue(this.minHeap.dequeue());
     }
   }
 
@@ -43,8 +45,8 @@ class MedianFinder {
     if (this.maxHeap.size() > this.minHeap.size()) {
       return this.maxHeap.getMax();
     } else {
-      const maxHeapTop = this.maxHeap.getMax();
-      const minHeapTop = this.minHeap.getMin();
+      const maxHeapTop = this.maxHeap.front();
+      const minHeapTop = this.minHeap.front();
 
       return (maxHeapTop + minHeapTop) / 2;
     }

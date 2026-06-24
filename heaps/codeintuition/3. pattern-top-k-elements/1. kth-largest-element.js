@@ -38,21 +38,23 @@
 
 // Once the loop finishes, the top element of the Min-Heap is your answer.
 
-import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
+// import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
+
+const { PriorityQueue, MinPriorityQueue } = require("@datastructures-js/priority-queue");
 
 function kthLargest(nums, k) {
-  const minHeap = new MinHeap();
+  const minHeap = new MinPriorityQueue();
 
   for (let i = 0; i < nums.length; i++) {
     // TC - Loop runs exactly n times!
-    minHeap.insert(nums[i]); // TC - inserting in the heap depends on the current size of heap, so it will be O(log k) not O(log n)!
+    minHeap.enqueue(nums[i]); // TC - inserting in the heap depends on the current size of heap, so it will be O(log k) not O(log n)!
 
     if (minHeap.size() > k) {
-      minHeap.extractMin(); // TC - Similarly, extracting the minimum element takes logarithmic time relative to the heap's current size. So it will be O(log k) not O(log n)!
+      minHeap.dequeue(); // TC - Similarly, extracting the minimum element takes logarithmic time relative to the heap's current size. So it will be O(log k) not O(log n)!
     }
   }
 
-  return minHeap.getMin(); // O(1)
+  return minHeap.front(); // O(1)
 }
 
 console.log(kthLargest([5, 4, 2, 8], 2));

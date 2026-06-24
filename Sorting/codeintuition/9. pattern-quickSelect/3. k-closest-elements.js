@@ -34,7 +34,7 @@ function partition(nums, start, end, target) {
   return j - 1;
 }
 
-console.log(kClosestElements([1, 2, 3, 4, 5], 4, 3));
+console.log(kClosestElements([6, 7, 3, 1], 2, 3));
 
 // ⏱️ Complexity
 

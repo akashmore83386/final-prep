@@ -10,27 +10,28 @@
 
 // at last we can just return the sum of the heap elements, which will be the final answer
 
-import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap.js";
+// import { MinHeap } from "../SIMILAR-PRACTICE/2. min-heap.js";
+const { PriorityQueue, MinPriorityQueue } = require("@datastructures-js/priority-queue");
 
 function maximizeSumAfterKNegations(nums, k) {
   // initialise the minHeap
-  const minHeap = new MinHeap();
+  const minHeap = new MinPriorityQueue();
 
   // push all the elements in the minHeap
   for (let i = 0; i < nums.length; i++) {
-    minHeap.insert(nums[i]);
+    minHeap.enqueue(nums[i]);
   }
 
   // k chances, this loop runs k times
   for (let i = 0; i < k; i++) {
     // extract minimum
-    let flipped = minHeap.extractMin();
+    let flipped = minHeap.dequeue();
 
     // flip it's sign by multiplying -1
     flipped = flipped * -1;
 
     // push back the element in minHeap
-    minHeap.insert(flipped);
+    minHeap.enqueue(flipped);
   }
 
   // final sum answer
@@ -38,7 +39,7 @@ function maximizeSumAfterKNegations(nums, k) {
 
   // we need to extract min until the minHeap is not empty
   while (!minHeap.isEmpty()) {
-    sum += minHeap.extractMin();
+    sum += minHeap.dequeue();
   }
 
   return sum;

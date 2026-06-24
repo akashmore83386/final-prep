@@ -7,15 +7,21 @@
 
 // Avoid mistake - The problem is not asking the sum between the elements, it i asking the sum of elements which fall into this [rangeStart, rangeEnd] range
 
-import { MaxHeap } from "../../SIMILAR-PRACTICE/1. max-heap.js";
-import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
+// import { MaxHeap } from "../../SIMILAR-PRACTICE/1. max-heap.js";
+// import { MinHeap } from "../../SIMILAR-PRACTICE/2. min-heap.js";
+
+const {
+  PriorityQueue,
+  MinPriorityQueue,
+  MaxPriorityQueue,
+} = require("@datastructures-js/priority-queue");
 
 function kRangeSum(nums, k1, k2) {
   const val1 = KthLargest(nums, k1); // 3
   const val2 = KthSmallest(nums, k2); // 5
 
-  const lowerBound = Math.min(val1, val2)
-  const upperBound = Math.max(val1, val2)
+  const lowerBound = Math.min(val1, val2);
+  const upperBound = Math.max(val1, val2);
 
   let sum = 0;
 
@@ -29,31 +35,31 @@ function kRangeSum(nums, k1, k2) {
 }
 
 function KthLargest(nums, k) {
-  const minHeap = new MinHeap();
+  const minHeap = new MinPriorityQueue();
 
   for (let i = 0; i < nums.length; i++) {
-    minHeap.insert(nums[i]);
+    minHeap.enqueue(nums[i]);
 
     if (minHeap.size() > k) {
-      minHeap.extractMin();
+      minHeap.dequeue();
     }
   }
 
-  return minHeap.getMin();
+  return minHeap.front();
 }
 
 function KthSmallest(nums, k) {
-  const maxHeap = new MaxHeap();
+  const maxHeap = new MaxPriorityQueue();
 
   for (let i = 0; i < nums.length; i++) {
-    maxHeap.insert(nums[i]);
+    maxHeap.enqueue(nums[i]);
 
     if (maxHeap.size() > k) {
-      maxHeap.extractMax();
+      maxHeap.dequeue();
     }
   }
 
-  return maxHeap.getMax();
+  return maxHeap.front();
 }
 
 console.log(kRangeSum([4, 7, 2, 12, 5], 2, 3));
