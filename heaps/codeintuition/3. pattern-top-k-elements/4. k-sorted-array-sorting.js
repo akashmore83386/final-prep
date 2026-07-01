@@ -51,9 +51,10 @@ const {
 
 function kSortedArray(arr, k) {
   const minHeap = new MinPriorityQueue();
+  let writeIndex = 0
 
-  // build initial heap of size k + 1
-  for (let i = 0; i < k + 1; i++) {
+  // build initial heap of size k + 1, what if arr.length <= k? In that case use Math.min(arr.length, k + 1)
+  for (let i = 0; i < Math.min(arr.length, k + 1); i++) {
     // O(log k + 1)
     minHeap.enqueue(arr[i]); // O(log k)
   } // O(k log k)
@@ -66,16 +67,15 @@ function kSortedArray(arr, k) {
 
   for (let i = k + 1; i < arr.length; i++) {
     // O(n)
-    arr[i - k - 1] = minHeap.dequeue(); // place min at correct position
+    arr[writeIndex] = minHeap.dequeue(); // place min at correct position
+    writeIndex++
     minHeap.enqueue(arr[i]); // O(log k)
   } // O(n log k)
 
   // empty remaining heap elements
-  // empty remaining heap elements
-  let outputIndex = arr.length - k - 1;
   while (!minHeap.isEmpty()) {
-    arr[outputIndex] = minHeap.dequeue();
-    outputIndex++;
+    arr[writeIndex] = minHeap.dequeue();
+    writeIndex++;
   }
 
   return arr;

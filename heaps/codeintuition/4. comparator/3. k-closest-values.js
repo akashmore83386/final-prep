@@ -31,7 +31,7 @@ function kClosestValues(root, k, target) {
     dfs(node.left);
     dfs(node.right);
   }
-  
+
   dfs(root);
 
   const result = [];
@@ -42,3 +42,33 @@ function kClosestValues(root, k, target) {
 
   return result;
 }
+
+// What if the question was only return the k closest elements
+
+// function kClosestElements(nums, k, target) {
+//     const maxHeap = new PriorityQueue((a, b) => {
+//         if(a[1] !== b[1]) {
+//             return b[1] - a[1]
+//         }
+//             return b[0] - a[0]
+//     })
+
+//     for(let i = 0; i < nums.length; i++) {
+//         const distance = Math.abs(nums[i] - target)
+
+//         maxHeap.enqueue([nums[i], distance])
+
+//         if(maxHeap.size() > k) {
+//             maxHeap.dequeue()
+//         }
+//     }
+
+//     let result = []
+//     while(!maxHeap.isEmpty()) {
+//         result.push(maxHeap.dequeue()[0])
+//     }
+
+//     return result
+// }
+
+// console.log(kClosestElements([6, 7, 3, 1], 2, 3)); // [1, 3]
