@@ -1,3 +1,22 @@
+// we are given an array of array, we need to return the smallest range, a smallest range is the range which contain the at least 1 number from every single inside array. 
+
+// Input - [[4, 8], [3, 6], [4, 5]]
+// Output - [3, 4]
+
+// If we check the first array, we can see that 4 comes in the range of [3, 4], also for the second array, 3 comes in the range of [3, 4], also for the 3rd array, 4 comes in the range. So that means, every element is coming in the range [3, 4] so it is the smallest range.
+
+// Approach - 
+
+// Now to have the smallest range, what we can do is we can have the MinHeap, where we will be putting all the values from each array, and we are going to push first element. Because since the arrays are sorted, first element will be smallest. So we are going to push first element from every array in the minHeap.
+
+// We will be storing like this in our minHeap -> [value, i, 0], value will be the actual element, i will be the index of the array in our whole array, 0 will be the 0th index of every element that we are pushing
+
+// Now using a loop we will push the first elements of evey single array, our minHeap will look like this -> [[3, 1, 0], [4, 0, 0], [4, 2, 0]]
+
+// Now we can have the range as minimum value of from the heap and currentMax as the maximum value so far in the heap, so bestRange = [minHeap.front()[0], currentMax] -> [3, 4]
+
+// Now we need to shrink the 
+
 const { MinPriorityQueue } = require("@datastructures-js/priority-queue");
 
 function smallestRange(nums) {

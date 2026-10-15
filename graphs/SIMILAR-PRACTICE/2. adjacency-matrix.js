@@ -5,8 +5,7 @@ function buildGraphAM(edges, n) {
     .map(() => Array(n).fill(0));
 
   for (let edge of edges) {
-    const source = edge[0];
-    const dest = edge[1];
+    const [source, dest] = edge
 
     // 2. Mark the connection with a 1
     // Update both ways for an undirected graph

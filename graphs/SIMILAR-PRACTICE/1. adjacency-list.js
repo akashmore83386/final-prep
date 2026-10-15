@@ -12,8 +12,7 @@ function buildGraph(edges, n) {
   const map = new Map();
 
   for (let edge of edges) {
-    const source = edge[0];
-    const dest = edge[1];
+    const [source, dest] = edge
 
     // initialise the adjacency list for the source if not present
     if (!map.has(source)) map.set(source, []);
